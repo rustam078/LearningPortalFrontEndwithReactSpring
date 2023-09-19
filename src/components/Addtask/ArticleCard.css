@@ -1,0 +1,92 @@
+/* ArticleCard.css */
+
+/* Styles for the article card container */
+.article-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-left: 10px;
+    align-items: center;
+    background-color: #fff;
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  /* Styles for the article image */
+  .article-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 16px;
+  }
+  
+  /* Styles for the article content */
+  .article-content {
+    flex-grow: 1;
+  }
+  
+  /* Styles for the article title */
+  .article-title {
+    font-size: 18px;
+    margin: 0;
+    height: 50px;
+    overflow: hidden;
+    width: 150px;
+  }
+  
+  /* Styles for the article description */
+  .article-description {
+    margin: 8px 0;
+  }
+  
+  /* Styles for the "Visit article" link */
+  .article-link {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  /* Styles for the delete button container */
+  .delete-button {
+    display: flex;
+    float: right;
+  }
+  
+  /* Styles for the delete icon */
+  .delete-button .MuiSvgIcon-root {
+    cursor: pointer;
+    color: #ff0000; /* Red color for the delete icon */
+  }
+  
+  /* Styles for the confirmation dialog */
+  .confirmation-dialog {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-top: 16px;
+    background-color: #f9f9f9;
+    position: fixed;
+    width: 300px;
+  }
+  
+  /* Styles for the confirmation dialog text */
+  .confirmation-dialog p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  /* Styles for the confirmation dialog buttons */
+  .confirmation-dialog button {
+    margin-right: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff; /* Blue color for buttons */
+    color: #fff; /* White text color */
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  /* Styles for the "No" button */
+  /* .confirmation-dialog button:last-child {
+    background-color: #ccc; 
+  } */
+  
