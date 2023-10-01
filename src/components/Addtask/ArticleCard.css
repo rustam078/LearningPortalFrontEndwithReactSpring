@@ -4,12 +4,13 @@
 .article-card {
     border: 1px solid #ccc;
     padding: 16px;
-    margin-left: 10px;
+    margin-left: 5px;
     align-items: center;
     background-color: #fff;
     width: 300px;
     height: 150px;
     overflow: hidden;
+    margin-bottom: 10px;
   }
   
   /* Styles for the article image */
@@ -17,7 +18,8 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    margin-right: 16px;
+    padding: 10px;
+    border-radius: 50%;
   }
   
   /* Styles for the article content */
@@ -50,43 +52,4 @@
     display: flex;
     float: right;
   }
-  
-  /* Styles for the delete icon */
-  .delete-button .MuiSvgIcon-root {
-    cursor: pointer;
-    color: #ff0000; /* Red color for the delete icon */
-  }
-  
-  /* Styles for the confirmation dialog */
-  .confirmation-dialog {
-    border: 1px solid #ccc;
-    padding: 16px;
-    margin-top: 16px;
-    background-color: #f9f9f9;
-    position: fixed;
-    width: 300px;
-  }
-  
-  /* Styles for the confirmation dialog text */
-  .confirmation-dialog p {
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  /* Styles for the confirmation dialog buttons */
-  .confirmation-dialog button {
-    margin-right: 8px;
-    padding: 8px 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff; /* Blue color for buttons */
-    color: #fff; /* White text color */
-    border-radius: 4px;
-    font-weight: bold;
-  }
-  
-  /* Styles for the "No" button */
-  /* .confirmation-dialog button:last-child {
-    background-color: #ccc; 
-  } */
   

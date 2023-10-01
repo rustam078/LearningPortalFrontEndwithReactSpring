@@ -2,22 +2,33 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import './ArticleCard.css';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deletecontentFromBackend } from '../../store/LoginService';
+import { deletecontentFromBackend } from '../../service/LoginService';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
-import ErrorModel from '../ErrorModel/ErrorModel';
+import UpdateModel from './updateModel/UpdateModel';
+import { queryClient } from '../TanStackQueryHttp/http';
 
 function ArticleCard({ id, title, articleUrl, imageUrl,type }) {
   const [showmodel,setShowModel]=useState();
  
      const navigate= useNavigate();
      const titiletype=type;
+     const currentURL = window.location.href;
+     const parts = currentURL.split('/');
+     const lastPart = parts[parts.length - 1];
+
   const handleDeleteClick = (id) => {
     const shouldDelete = window.confirm(`Are you sure you want to delete this  ${titiletype}? `);
     if (shouldDelete) {
       deletecontentFromBackend(id).then(response => {
         toast.success(`${titiletype} deleted successfully!`);
-        navigate("/dashboard/articles");
+        queryClient.invalidateQueries({queryKey:['notification']});
+        queryClient.invalidateQueries({queryKey:['fetchCategories']});
+        if(isNaN(lastPart)){
+          navigate(`/dashboard/${lastPart}`);
+          }else{
+           navigate(`/dashboard`);
+          }
       })
       .catch(error => {
         console.log(error)
@@ -47,7 +58,7 @@ function ArticleCard({ id, title, articleUrl, imageUrl,type }) {
 
   return (
     <>
-    {showmodel &&<ErrorModel id={showmodel.id} title={showmodel.title} videoUrl={showmodel.videoUrl} onConfirm={updatesetShowModel}/>}
+    {showmodel &&<UpdateModel id={showmodel.id} title={showmodel.title} videoUrl={showmodel.videoUrl} onConfirm={updatesetShowModel}/>}
     <div className="article-card">
       <div style={{display:'flex'}}>
       <img src={imageUrl} alt="Article Image" className="article-image" />

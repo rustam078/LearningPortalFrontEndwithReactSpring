@@ -9,6 +9,7 @@
   width: 300px;
   height: 150px;
   overflow: hidden;
+  margin-bottom: 10px;
   }
   
   .video-thumbnail {
@@ -23,7 +24,7 @@
   
   .video-title {
     font-size: 18px;
-    margin: 0;
+    margin: 0px 0px 0px 15px;
     height: 50px;
     overflow: hidden;
     width: 150px;
@@ -38,20 +39,26 @@
     float: right;
   }
 
+.delete-button .MuiSvgIcon-root {
+  cursor: pointer;
+  color: #ff0000; /* Red color for the delete icon */
+}
+
+
   /* CSS for video card container */
 .video-card-container {
   display: flex;
   flex-wrap: wrap; /* Enable wrapping to next row */
-  gap: 16px; /* Adjust the gap between video cards as needed */
-  justify-content: space-between; /* Distribute space between video cards */
+  gap: 16px;
+  justify-content: flex-start;
   align-items: flex-start; /* Align items to the top of each row */
 }
 
 /* CSS for video card wrapper */
-.video-card-wrapper {
-  flex: 1; /* Allow video card wrappers to grow and fill available space */
-  max-width: calc(33.33% - 16px); /* Adjust the maximum width of each card to fit three cards per row (with gap) on larger screens */
-}
+/* .video-card-wrapper {
+  flex: 1; 
+  max-width: calc(33.33% - 16px); 
+} */
 
 @media (max-width: 768px) {
   .video-card-container {
@@ -64,62 +71,4 @@
   .video-card-wrapper {
     max-width: 100%; /* Occupy full width */
   }
-}
-
-/* ArticleCard.css */
-.article-link {
-  color: #0077cc; /* Link text color */
-  text-decoration: none; /* Remove underlines */
-  font-weight: bold; /* Make the text bold */
-  cursor: pointer; /* Show a pointer cursor on hover */
-}
-
-.article-link:hover {
-  text-decoration: underline; /* Underline the link on hover */
-}
-
-
-
-
-/* Styles for the delete button container */
-.delete-button {
-  display: flex;
-  align-items: center;
-}
-
-/* Styles for the delete icon */
-.delete-button .MuiSvgIcon-root {
-  cursor: pointer;
-  color: #ff0000; /* Red color for the delete icon */
-}
-
-/* Styles for the confirmation dialog */
-.confirmation-dialog {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin-top: 16px;
-  background-color: #f9f9f9;
-}
-
-/* Styles for the confirmation dialog text */
-.confirmation-dialog p {
-  margin: 0;
-  font-weight: bold;
-}
-
-/* Styles for the confirmation dialog buttons */
-.confirmation-dialog button {
-  margin-right: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  border: none;
-  background-color: #007bff; /* Blue color for buttons */
-  color: #fff; /* White text color */
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-/* Styles for the "No" button */
-.confirmation-dialog button:last-child {
-  background-color: #ccc; /* Gray color for "No" button */
 }

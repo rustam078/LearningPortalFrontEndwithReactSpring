@@ -3,20 +3,18 @@ import {  createBrowserRouter,RouterProvider } from 'react-router-dom';
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SignForm from "./components/SignForm";
-import Footer from './pages/Footer';
-import PrivateRoutes from './store/PrivateRoutes';
-import UserProfile from './components/UserProfile';
-import Skill from './components/Addtask/Skill';
-import Contacts from './pages/Contacts';
-import Qualification from './pages/Qualification';
-import Services from './pages/Services';
-import Register from './components/Register';
-import RootHeader from './components/RootHeader';
-import LandingPage from './pages/LandingPage';
+import SignForm from "./components/user/SignForm";
+import ContentRenderOutLet from './components/user/ContentRenderOutLet';
+import UserProfile from './components/user/UserProfile';
+import ContentRenderPage from './components/Addtask/ContentRenderPage';
+import Register from './components/user/Register';
+import PrivateRoutes from './service/PrivateRoutes';
+import LandingPage from './static homepages/LandingPage';
 import AddContentForm from './components/Addtask/AddContentForm';
-import { loader as videoLoader } from './components/Addtask/Skill';
-import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
+import { loader as videoLoader } from './components/Addtask/ContentRenderPage';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './components/TanStackQueryHttp/http';
+import ViewDetailsPage,{loader as viewDetailsvideoLoader} from './components/Addtask/ViewDetailsPage';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,11 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <PrivateRoutes />,
+    element: <ContentRenderOutLet/>,
     children: [
       {
         path: "/",
-        element: <RootHeader />,
+        element: <PrivateRoutes />,
         children: [
           {
             path: "dashboard",
@@ -44,39 +42,37 @@ const router = createBrowserRouter([
           },
           {
             path: "dashboard/mediamix",
-            element: <Skill/>,
+            element: <ContentRenderPage/>,
             loader:videoLoader,
   
           },
           {
             path: "dashboard/videos",
-            element: <Skill/>,
+            element: <ContentRenderPage/>,
             loader:videoLoader,
   
           },
           {
+            path: "dashboard/viewdetails/:id",
+            element: <ViewDetailsPage/>,
+            loader:viewDetailsvideoLoader,
+  
+          },
+          {
             path: "dashboard/articles",
-            element: <Skill/>,
+            element: <ContentRenderPage/>,
             loader:videoLoader,
   
           },
           {
             path: "dashboard/categories/view/:id",
-            element: <Skill />,
+            element: <ContentRenderPage />,
             loader:videoLoader,
 
           },
           {
             path: "dashboard/addTask",
             element: <AddContentForm />,
-          },
-          {
-            path: "dashboard/editTask",
-            element: <Services />,
-          },
-          {
-            path: "dashboard/deleteTask",
-            element: <Contacts />,
           },
           {
             path: "/*",
@@ -90,7 +86,7 @@ const router = createBrowserRouter([
 
 
 
-  const queryClient=new QueryClient();
+
 function App() {
 
   return (
