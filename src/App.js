@@ -89,17 +89,14 @@ const router = createBrowserRouter([
 ]);
 
 
-export const Store = createContext();
+
   const queryClient=new QueryClient();
 function App() {
-  const [userDetails, setUserDetails] = useState(null);
+
   return (
     <QueryClientProvider client={queryClient}>
-    <Store.Provider value={{ userDetails, setUserDetails}}>
         <ToastContainer />
         <RouterProvider router={router} />
-        {/* <Footer/> */}
-    </Store.Provider>
     </QueryClientProvider>
   );
 }

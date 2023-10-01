@@ -126,7 +126,7 @@ function AddContentForm() {
             </select>
           </label>
         </div>
-        <div>
+       {contentType === "ARTICLE"&&( <div>
           <label>
             Image Type:
             <input
@@ -151,8 +151,9 @@ function AddContentForm() {
             Image URL
           </label>
         </div>
+        )}
         {/* Conditionally render the image input based on the selected image type */}
-        {imageType === "upload" && (
+        {contentType === "ARTICLE"&& imageType === "upload" && (
           <div>
             <label>
               Image:
@@ -164,7 +165,7 @@ function AddContentForm() {
             </label>
           </div>
         )}
-        {imageType === "link" && (
+        {contentType === "ARTICLE"&& imageType === "link" && (
           <div>
             <label>
               Image URL:

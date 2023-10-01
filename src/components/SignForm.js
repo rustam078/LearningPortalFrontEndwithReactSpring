@@ -2,17 +2,13 @@ import React, { useState, useContext } from "react";
 import "./register.css";
 import { loadPopup, loadSuccessPopup } from "../utils/LoginUtils";
 import axios from "axios";
-import { Store } from "../App";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import { login } from "../reduxstore/AuthSlice";
+
 
 const SignForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { userDetails, setUserDetails } = useContext(Store);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
@@ -45,12 +41,6 @@ const jwtToken = jwtCookie ? jwtCookie.split('=')[1] : null;
 
 console.log('JWT Token:', jwtToken);
         loadSuccessPopup("Sign-in successful");
-         dispatch(login({
-          firstname: response.data.firstname,
-          emaill: response.data.email,
-          isAuthenticated: true,
-        }));
-        setUserDetails(response.data);
         sessionStorage.setItem("user", JSON.stringify(response.data));
         navigate("/dashboard");
       } catch (error) {
