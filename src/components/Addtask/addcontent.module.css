@@ -22,8 +22,7 @@
   }
   
   .formcontainer label {
-    display: block;
-    margin-bottom: 10px;
+    margin-right: 10px;
     font-weight: bold;
   }
   
@@ -46,5 +45,15 @@
   
   .formcontainer button:hover {
     background-color: #0056b3;
+  }
+    
+  .modal {
+    position: fixed;
+    top: 15vh;
+    left: 40%;
+    width:400px;
+    z-index: 100;
+    overflow: hidden;
+    padding: 10px;
   }
   

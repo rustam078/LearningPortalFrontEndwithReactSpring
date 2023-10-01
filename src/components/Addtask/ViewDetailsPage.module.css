@@ -1,0 +1,90 @@
+.flexcontainer {
+  display: flex;
+  margin-top: -35px;
+  background-color: white;
+}
+
+.container {
+  padding: 1px;
+  padding-top: 30px;
+  background-color: white;
+  border: 1px solid white;
+  margin-right: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.videoListContainer {
+  width: 90%;
+}
+.videoList {
+  height: 482px;
+  background: white;
+  overflow-y: auto;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.itemList {
+  height: auto;
+  box-shadow: 1px 2px 1px whitesmoke;
+}
+
+.videoListHeader {
+  height: 60px;
+  background-color: white;
+  border: 1px solid rgb(240, 231, 231);
+  padding-left: 50px;
+  padding-top: 20px;
+  margin-bottom: 5px;
+  box-shadow: 5px 5px 10px rgba(216, 206, 206, 0.3);
+}
+
+/* Hide the scroll bar */
+.videoList::-webkit-scrollbar {
+  width: 0.5em; /* Adjust the width as needed */
+}
+
+.videoList::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Make the scroll thumb transparent */
+}
+
+.videoTitle {
+  max-width: 220px; /* Adjust the maximum width as needed */
+  font-size: small;
+  font-weight: 900;
+  padding-top: 5px;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 80px;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 15%;
+}
+.viewCount {
+    margin-top: revert;
+    font-size: 14px;
+}
+
+.activeItem {
+    background-color: #e6e6e6; /* Change to your desired background color */
+  }
+  
+
+  .videoplayerTitle{
+    padding: 10px;
+    font-size: large;
+    font-family: math;
+    font-weight: 900;
+  }
+
+  .channel{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .desc{
+    display: flex;
+    justify-content: space-between;
+  }

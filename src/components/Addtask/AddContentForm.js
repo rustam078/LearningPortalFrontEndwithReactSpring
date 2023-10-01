@@ -1,19 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./addcontent.module.css";
-import { getUser } from "../../store/LoginService";
-import { loadSuccessPopup,loadPopup } from "../../utils/LoginUtils";
+import { getUser } from "../../service/LoginService";
+import { loadSuccessPopup,loadPopup } from "../../service/ToastifyPopup";
 import { useNavigate } from "react-router-dom";
+import { queryClient } from "../TanStackQueryHttp/http";
+import ReactDOM from "react-dom";
+import classess from "./updateModel/update.module.css";
+import Card from "./updateModel/Card";
+import { motion, AnimatePresence } from 'framer-motion';
 
-function AddContentForm() {
+const modalVariants = {
+  hidden: {
+    opacity: 0.7,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 260,
+      damping: 100,
+    },
+  },
+};
+const Backdrop = (props) => {
+  return <div className={classess.backdrop} onClick={props.onConfirm} />;
+};
+
+function AddContentForm(props) {
   const [contentType, setContentType] = useState("VIDEO");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [category, setCategory] = useState("");
-  const [imageType, setImageType] = useState("upload"); // Added state for image type
+  const [imageType, setImageType] = useState("link"); // Added state for image type
   const [image, setImage] = useState(null); // New state for the uploaded image file
-  const [imageUrl, setImageUrl] = useState(""); // New state for image URL
+  const [imageUrl, setImageUrl] = useState(`https://picsum.photos/300/${Math.floor(Math.random() * 900) + 100}`); // New state for image URL
   const navigate = useNavigate();
   const user = getUser();
+
+  useEffect(()=>{
+    document.body.style.overflowY="hidden";
+    return ()=>{
+      document.body.style.overflowY="scroll";
+    }
+  },[]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +71,8 @@ function AddContentForm() {
       .then((data) => {
         loadSuccessPopup("Record added successful...");
         console.log("Response from server:", data);
+        queryClient.invalidateQueries({queryKey:['fetchCategories']});
+        props.onConfirm();
         navigate("/dashboard");
       })
       .catch((error) => {
@@ -61,8 +93,26 @@ function AddContentForm() {
   };
 
   return (
-    <div className={classes.formcontainer}>
+    <React.Fragment>
+    {ReactDOM.createPortal(
+      <Backdrop onConfirm={props.onConfirm} />,
+      document.getElementById('backdrop-root')
+    )}
+
+    {ReactDOM.createPortal(
+         <motion.div
+         style={{position:'fixed',zIndex:'10'}}
+         variants={modalVariants}
+         initial="hidden"
+         animate="visible"
+         exit="hidden"
+         >
+      <div className={classes.formcontainer}>
       <form onSubmit={handleSubmit}>
+      <Card className={classes.modal} style={{width:"300px"}}>
+      <header className={classess.header}>
+      <h2>Add Task</h2>
+      </header>
         <div className={classes.type}>
           <label>
             Content Type:
@@ -86,9 +136,10 @@ function AddContentForm() {
             Article
           </label>
         </div>
-        <div>
+        <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
           <label>
             Title:
+           </label>
             <input
               type="text"
               value={title}
@@ -99,21 +150,21 @@ function AddContentForm() {
               }
             }
             />
-          </label>
         </div>
-        <div>
+        <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
           <label>
             URL:
+            </label>
             <input
               type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
-          </label>
         </div>
-        <div>
+        <div style={{display:'flex',marginRight:'10px',marginBottom:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
           <label>
             Category:
+            </label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -124,11 +175,13 @@ function AddContentForm() {
               <option value="3">React</option>
               <option value="4">Spring</option>
             </select>
-          </label>
         </div>
-        <div>
+     
+       {contentType === "ARTICLE"&&(<> <hr/>
+       <div style={{display:'flex',margin:'10px',justifyContent: 'space-between', alignItems: 'baseline'}}>
           <label>
             Image Type:
+            </label>
             <input
               type="radio"
               name="imageType"
@@ -149,36 +202,43 @@ function AddContentForm() {
 />
 
             Image URL
-          </label>
         </div>
+        </>
+        )}
         {/* Conditionally render the image input based on the selected image type */}
-        {imageType === "upload" && (
-          <div>
+        {contentType === "ARTICLE"&& imageType === "upload" && (
+          <div style={{display:'flex',margin:'10px',justifyContent: 'space-between', alignItems: 'baseline'}}>
             <label>
               Image:
+              </label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
               />
-            </label>
           </div>
         )}
-        {imageType === "link" && (
-          <div>
+        {contentType === "ARTICLE"&& imageType === "link" && (
+          <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
             <label>
               Image URL:
+              </label>
               <input
                 type="text"
-                value={imageUrl}
+                value={`https://picsum.photos/300/${Math.floor(Math.random() * 900) + 100}`}
                 onChange={(e) => setImageUrl(e.target.value)}
               />
-            </label>
           </div>
         )}
         <button type="submit">Add Content</button>
+      </Card>
       </form>
-    </div>
+      </div>
+    </motion.div>
+      ,
+      document.getElementById("overlay-root")
+    )}
+  </React.Fragment>
   );
 }
 
