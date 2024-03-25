@@ -56,7 +56,7 @@ function AddContentForm(props) {
       imageUrl:imageUrl,
     };
 
-    let urls = "http://localhost:8080/api/categories/add";
+    let urls = "https://mpairavat.in/learningPortal/api/categories/add";
     console.log(newContent);
     const token = user.token;
     fetch(urls, {

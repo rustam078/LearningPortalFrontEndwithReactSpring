@@ -46,7 +46,7 @@ function ContentRenderPage() {
           </motion.div>
         ))
       ) : (
-        <p style={{ fontWeight: 'bold', color: 'red', marginLeft: '510px' }}>
+        <p className='nocontent'>
           No content available ......
         </p>
       )}
@@ -73,15 +73,15 @@ export async function loader({ request, params }) {
   // Construct the API URL based on the condition
   let apiUrl;
   if (isVideoRequest) {
-    apiUrl = 'http://localhost:8080/api/categories/byContentType?contentType=VIDEO';
+    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=VIDEO';
   } else if (isArticleRequest) {
-    apiUrl = 'http://localhost:8080/api/categories/byContentType?contentType=ARTICLE';
+    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=ARTICLE';
   } else {
-    apiUrl = 'http://localhost:8080/api/categories/view';
+    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/view';
   }
 
   if (params.id != null) {
-       apiUrl = `http://localhost:8080/api/categories/fetchByCategoryAndUser?categoryId=${categoryToFetch}`;
+       apiUrl = `https://mpairavat.in/learningPortal/api/categories/fetchByCategoryAndUser?categoryId=${categoryToFetch}`;
     try {
       const response = await fetch(apiUrl, HEADERS());
 

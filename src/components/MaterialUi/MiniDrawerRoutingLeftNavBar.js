@@ -1,4 +1,4 @@
-import * as React from "react";
+import React,{useEffect} from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -116,6 +116,20 @@ export default function MiniDrawerRoutingLeftNavBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [activeLink, setActiveLink] = React.useState(null);
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setOpen(window.innerWidth > 768); // Set open to true if viewport width > 768px
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // const [report, setReport] = React.useState([]);
 
 
@@ -142,7 +156,7 @@ export default function MiniDrawerRoutingLeftNavBar() {
   
   // const [categories, setCategories] = React.useState([]);
   // React.useEffect(() => {
-    //   axios.get('http://localhost:8080/api/categories/user', HEADERS()
+    //   axios.get('https://mpairavat.in/learningPortal/api/categories/user', HEADERS()
     //   )
     //     .then((response) => {
       //       console.log(response.data);

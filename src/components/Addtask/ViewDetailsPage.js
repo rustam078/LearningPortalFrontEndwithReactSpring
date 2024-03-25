@@ -19,7 +19,7 @@ const ViewDetailsPage = () => {
   const videoUrl = searchParams.get("url");
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(videoUrl);
   const [selectedVideoTitle, setSelectedVideoTitle] = useState("First video");
-
+  const isMobileView = window.innerWidth <= 768;
   // Function to handle video link clicks
   const handleVideoLinkClick = (url, index, title) => {
     setSelectedVideoUrl(url);
@@ -50,15 +50,17 @@ const ViewDetailsPage = () => {
           <ReactPlayer
             url={selectedVideoUrl}
             controls={true}
-            height="400px"
-            width="780px"
+            height={isMobileView ? "300px" : "400px"}
+            width={isMobileView ? "360px" : "780px"}
           />
           <div className="video-content">
             <h2 className={classes.videoplayerTitle}>{selectedVideoTitle}</h2>
             <div className={classes.desc}>
               <div className={classes.channel}>
+                <div className={classes.channel1}>
                 <Avatar src={faker.image.avatar()} alt="Channel Avatar" />
                 <span>Channel Name</span>
+                </div>
                 <Button
                   variant="contained"
                   style={{
@@ -70,7 +72,7 @@ const ViewDetailsPage = () => {
                   Subscribe
                 </Button>
               </div>
-              <div>
+              <div className={classes.likedislike}>
               <Button
   variant="text"
   startIcon={<ThumbUpIcon />}
@@ -104,6 +106,13 @@ const ViewDetailsPage = () => {
               </div>
             </div>
           </div>
+
+          <p className={isMobileView ? classes.contmobile : classes.contlarge}>
+        Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
+        reprehenderit dolor. Ipsum Lorem excepteur adipisicing ea eu
+        exercitation commodo reprehenderit dolor.
+      </p>
+
         </div>
 
         <div className={classes.videoListContainer}>
@@ -145,11 +154,7 @@ const ViewDetailsPage = () => {
                 ))
               ) : (
                 <p
-                  style={{
-                    fontWeight: "bold",
-                    color: "red",
-                    marginLeft: "510px",
-                  }}
+                  className={classes.nocontent}
                 >
                   No content available ......
                 </p>
@@ -159,15 +164,7 @@ const ViewDetailsPage = () => {
         </div>
       </div>
 
-      <div style={{ backgroundColor: "white" }}>
-        Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
-        reprehenderit dolor. Ipsum Lorem excepteur adipisicing ea eu
-        exercitation commodo reprehenderit dolor. Ipsum Lorem excepteur
-        adipisicing ea eu exercitation commodo reprehenderit dolor. Ipsum Lorem
-        excepteur adipisicing ea eu exercitation commodo reprehenderit dolor.
-        Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
-        reprehenderit dolor.
-      </div>
+    
     </>
   );
 };
@@ -176,7 +173,7 @@ export default ViewDetailsPage;
 
 export async function loader() {
   let apiUrl =
-    "http://localhost:8080/api/categories/byContentType?contentType=VIDEO";
+    "https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=VIDEO";
   try {
     const response = await fetch(apiUrl, HEADERS());
 

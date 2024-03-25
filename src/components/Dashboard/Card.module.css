@@ -36,3 +36,13 @@
     outline: none; /* Remove focus outline */
   }
   
+
+  @media screen and (max-width: 768px) {
+
+    .card {
+      width: 276px;
+      display: flex;
+     gap: 50px;
+      }
+  }
+  

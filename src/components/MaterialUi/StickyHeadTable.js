@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { getAllUsersFromBackend } from '../../service/LoginService';
 import { faker } from '@faker-js/faker';
 import RadarChartComponent from './RadarChartComponent';
+import classes from "../user/UserProfile.module.css";
 const columns = [
   { id: 'userId', label: 'Id', minWidth: 170},
   { id: 'username', label: 'UserName', minWidth: 100 },
@@ -87,8 +88,8 @@ console.log(rows);
 
   return (
     <>
-     <div style={{display:"flex"}}>
-    <Paper sx={{marginLeft:'20px', width: '70%', overflow: 'hidden' }}>
+     <div className={classes.align}>
+    <Paper className={classes.paperr}>
       <TableContainer sx={{ maxHeight: 320}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -158,9 +159,7 @@ console.log(rows);
          onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
- <div style={{width:"350px", backgroundColor:"#ffffffe6",
-    marginLeft: "20px",
-    borderRadius: "10px"}}>
+ <div className={classes.redarchart}>
  <RadarChartComponent data={users} />
  </div>
     </div>

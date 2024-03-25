@@ -66,7 +66,7 @@
     padding: 20px 0px;
     }
   
-  .hero-content {
+  .hero-content,.color-content {
     max-width: 800px;
     margin: 0 auto;
     position: absolute;
@@ -129,3 +129,34 @@
     font-weight: bold;          /* Bold text for active link */
     color: #ff5733;        /* Bold text for the active link */
   }
+
+  
+
+  /* CSS for screens with a width of 768px or larger */
+@media screen and (max-width: 767px) {
+  .hero-content {
+    top: 125px;
+    left: 0px;
+
+  }
+
+  .color-content{
+    max-width: 800px;
+    margin: 0 auto;
+    position: absolute;
+    top: 125px;
+    left: 0px;
+    background-color: blueviolet;
+    padding-bottom: 40px;
+    
+  }
+  .welcome{
+    height: 55vh;
+  }
+
+  
+  .cta-button {
+    margin-left: -10px;
+  }
+  
+}

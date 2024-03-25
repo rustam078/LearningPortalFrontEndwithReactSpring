@@ -78,3 +78,9 @@
  
   }
   
+@media screen and (max-width: 768px) {
+  .cardContainer{
+    display: block;
+    justify-content: center;
+  }
+}

@@ -8,7 +8,7 @@ const initialValue = {
   lastname: "",
   email: "",
   password: "",
-  role: "",
+  role: "USER"
 };
 const Register = (props) => {
   const [formData, setFormData] = useState(initialValue);
@@ -20,7 +20,7 @@ const Register = (props) => {
       try {
         const email = formData.email;
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/validate-email",
+          "https://mpairavat.in/learningPortal/api/v1/auth/validate-email",
           { email }
         );
         if (response.data === true) {
@@ -83,15 +83,15 @@ const Register = (props) => {
       isValid = false;
     }
 
-    if (formData.role === "") {
-      loadPopup("Please select Role");
-      isValid = false;
-    }
+    // if (formData.role === "") {
+    //   loadPopup("Please select Role");
+    //   isValid = false;
+    // }
 
     if (isValid) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/register",
+          "https://mpairavat.in/learningPortal/api/v1/auth/register",
           formData
         ); // Adjust the URL to your backend endpoint
         console.log("Registration response:", response.data);
@@ -151,7 +151,7 @@ const Register = (props) => {
             // required
           />
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Role:</label>
           <select
             name="role"
@@ -163,7 +163,7 @@ const Register = (props) => {
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
           </select>
-        </div>
+        </div> */}
         <div className="flexbtn">
         <button type="submit" >Register</button>
           <Link to="/" style={{ textDecoration: "none" }}>

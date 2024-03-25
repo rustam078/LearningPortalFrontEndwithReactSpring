@@ -59,6 +59,11 @@
   flex: 1; 
   max-width: calc(33.33% - 16px); 
 } */
+.nocontent{
+   font-weight: bold;
+    color: red;
+     margin-left: 510px;
+}
 
 @media (max-width: 768px) {
   .video-card-container {
@@ -71,4 +76,8 @@
   .video-card-wrapper {
     max-width: 100%; /* Occupy full width */
   }
+
+  .nocontent{
+      margin-left: 0px;
+ }
 }

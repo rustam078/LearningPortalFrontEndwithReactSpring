@@ -29,23 +29,38 @@ const LandingPage = () => {
   const ywelcome = useTransform(scrollY, [0, 200], [0, -100]);
   const opacitysec = useTransform(
     scrollY,
-    [0, 200, 300, 500],
+    [0, 200, 300, 400],
     [1, 0.7, 0.5, 0]
   );
   const scaleText = useTransform(
     scrollY,
-    [0, 100, 200, 300, 400],
-    [1, 1.2, 1.5, 1.2, 1]
+    [0, 100, 150, 200, 300],
+    [1, 1.2, 1.4, 1.2, 1]
   );
-  const yText = useTransform(
-    scrollY,
-    [0, 200, 300, 400, 500],
-    [0, 50, 100, 200, 340]
-  );
+
+    // Define different animations for laptop and mobile views
+    const yText = useTransform(
+      scrollY,
+      [0, 200, 300, 400, 500],
+      [0, 150, 250, 350, 350]
+    );
+  
+    // For mobile view
+    const yTextMobile = useTransform(
+      scrollY,
+      [0, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200,1300,1400,1500,1600],
+      [0, 150, 240, 340, 440, 540, 640, 740, 840, 940, 1040, 1140,1240,1340,1440,1540]
+    );
+  
+    // Determine which yText value to use based on viewport width
+    const yTextToUse = window.innerWidth > 768 ? yText : yTextMobile;
+  
+
   const h1Style = {
-    color: scroll > 400 ? "black" : "white",
+    color: scroll > 280 ? "black" : "white",
   };
-  console.log(scroll);
+  const contentClass = scroll < 225 ? 'hero-content' : 'color-content';
+
   const handleLinkClick = (link) => {
     setActiveLink(link);
   };
@@ -81,7 +96,7 @@ const LandingPage = () => {
               className={activeLink === "about" ? "active-link" : ""}
             >
               <a href="#about" onClick={() => handleLinkClick("about")}>
-                About Us
+                AboutUs
               </a>
             </motion.li>
             <motion.li
@@ -106,8 +121,8 @@ const LandingPage = () => {
           id=" welcome image"
         />
         <motion.div
-          className="hero-content"
-          style={{ scale: scaleText, y: yText }}
+          className={contentClass}
+          style={{ scale: scaleText, y: yTextToUse }}
         >
           <h1 style={h1Style}>Welcome to Our Awesome Website</h1>
           <p style={h1Style}>Discover amazing features and services.</p>
@@ -124,7 +139,7 @@ const LandingPage = () => {
           </button>
         </motion.div>
       </section>
-      <section className={styles.features} id="features">
+      <section className={styles.features} id="features" >
         <div className={styles.app}>
           <h1>Features</h1>
           <div className={styles.cardContainer}>
@@ -165,42 +180,8 @@ const LandingPage = () => {
           sed sollicitudin neque ornare molestie. Nulla vel magna enim. Nam
           luctus lectus est, pulvinar placerat quam lacinia non. Nulla volutpat
           magna leo. Pellentesque in porttitor massa. Etiam dapibus purus vel
-          iaculis commodo. Nulla volutpat nulla non hendrerit pretium. Fusce
-          posuere maximus leo, sed mattis nunc porttitor in. In consequat, nunc
-          et luctus aliquet, ante neque dignissim ex, sed bibendum sapien orci
-          bibendum enim. Cras eget nisi aliquam, tincidunt mauris non, gravida
-          velit. Quisque quis cursus augue, laoreet porttitor magna. Aenean
-          dapibus lacus nec lectus rhoncus vulputate. Aenean tempus, urna quis
-          placerat tincidunt, odio risus lobortis nibh, viverra fermentum odio
-          lectus vel felis. Mauris porttitor elementum nisl. Aliquam tempus, leo
-          eget gravida vehicula, leo enim lacinia lacus, ac pharetra libero
-          turpis in augue. Phasellus consequat accumsan arcu. Integer eu massa a
-          erat bibendum elementum. Aliquam id bibendum arcu. Praesent interdum
-          massa quis blandit ullamcorper. Nam commodo vitae ante non ultrices.
-          Suspendisse in varius mauris, id consectetur massa. Phasellus ac
-          suscipit sem. Sed sit amet dignissim sapien, sed cursus elit.
-          Vestibulum semper tellus ac nulla lacinia mollis. Phasellus pretium
-          nulla ac eleifend lacinia. Mauris maximus elit eu massa interdum, et
-          vestibulum nisl congue. Quisque sed eleifend ligula. Maecenas mattis
-          nec risus quis euismod. Pellentesque blandit eros condimentum dolor
-          malesuada gravida ut sit amet nisl. Vivamus porta quis sapien id
-          posuere. Sed quis nibh velit. Quisque mollis vestibulum odio pulvinar
-          convallis. Aliquam non elit non sem porta congue. Donec bibendum
-          lectus vel consequat vestibulum. Aliquam pharetra odio non nunc
-          feugiat aliquam. Praesent tincidunt sed nunc vel iaculis. Cras porta
-          scelerisque arcu, at facilisis magna finibus quis. Pellentesque
-          finibus elit nec tortor posuere aliquam. Suspendisse venenatis nisi
-          eget nisl pharetra tempus. Pellentesque in elit pellentesque, varius
-          tortor ut, hendrerit massa. Class aptent taciti sociosqu ad litora
-          torquent per conubia nostra, per inceptos himenaeos. Nullam quis enim
-          vitae libero ornare tempus nec eget neque. Maecenas dui felis, commodo
-          id dictum eu, laoreet at leo. Vestibulum scelerisque urna velit, vel
-          condimentum tellus laoreet in. Phasellus tempus neque in elit rhoncus
-          commodo. Etiam ac lacus convallis tellus rutrum varius. Cras consequat
-          in metus in efficitur. In sapien sem, imperdiet non tortor in, viverra
-          feugiat orci. Phasellus at mi sollicitudin, commodo lectus nec,
-          porttitor orci. Nulla ut dui dui. Quisque sagittis viverra dui in
-          lobortis.
+          iaculis commodo. Nulla volutpat nulla non hendrerit pretium.
+          
         </p>
       </section>
       <section className="contact" id="contact">

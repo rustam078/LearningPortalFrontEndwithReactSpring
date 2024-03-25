@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 const SignForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
 
@@ -31,7 +33,7 @@ const SignForm = () => {
     if (isValid) {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/v1/auth/authenticate",
+          "https://mpairavat.in/learningPortal/api/v1/auth/authenticate",
           { email, password }
         );
         console.log("Sign-in response:", response.data);
@@ -53,47 +55,92 @@ console.log('JWT Token:', jwtToken);
     }
   };
 
-  // const signupFormHandler = () => {
-  //   props.onClick();
-  // };
+  const handleSend = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`https://mpairavat.in/learningPortal/forgetPassword/${email}`);
+      loadSuccessPopup("Password reset email sent successfully ");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      loadPopup("Error sending password reset email");
+    }
+    setIsForgotPassword(false); // Reset the form after sending the email
+    setEmail(""); // Clear the email field
+    setIsLoading(false);
+  };
 
   return (
     <div className="App">
-        <h1>Sign In Form</h1>
-      <div className="form-container">
-        <form  className="form" onSubmit={handleSignIn}>
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              //   required
-            />
-          </div>
+    <h1>Sign In Form</h1>
+    <div className="form-container">
+      <form className="form" onSubmit={handleSignIn}>
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        {!isForgotPassword && (
           <div className="form-group">
             <label>Password:</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              //   required
             />
           </div>
-          <div className="flexbtn">
-            <motion.button 
-            whileHover={{scale:1.1}}
-            transition={{type:'spring',stiffness:500}}
-            type="submit">Sign In</motion.button>
-            not a member?
-            <Link to="/register" style={{ textDecoration: "none" }}>
-              Sign Up
-            </Link>
-          </div>
-        </form>
-      </div>
+        )}
+        {isLoading && <p style={{textAlign:"center",margin:'5px',color: "#0e5c5f"}}>Sending please wait...</p>}
+        <div className="flexbtn">
+          {isForgotPassword ? (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 500 }}
+              type="button"
+              onClick={handleSend}
+              disabled={isLoading}
+            >
+              {isLoading ? "Sending..." : "Send Email"}
+            </motion.button>
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 500 }}
+              type="submit"
+            >
+              Sign In
+            </motion.button>
+          )}
+          {!isForgotPassword && (
+            <>
+              not a member?
+              <Link to="/register" style={{ textDecoration: "none" }}>
+                Sign Up
+              </Link>
+            </>
+          )}
+
+        </div>
+        <Link
+          to="#"
+          style={{
+            textDecoration: "none",
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "31px",
+          }}
+          onClick={() => setIsForgotPassword(!isForgotPassword)}
+        >
+          {isForgotPassword ? "Back to Sign In" : "Forget Password?"}
+        </Link>
+
+      </form>
     </div>
-  );
+  </div>
+);
 };
 
 export default SignForm;

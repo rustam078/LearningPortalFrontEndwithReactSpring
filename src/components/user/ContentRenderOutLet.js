@@ -2,11 +2,12 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import MiniDrawerRoutingLeftNavBar from "../MaterialUi/MiniDrawerRoutingLeftNavBar";
 import AddContent from "../Addtask/AddContent";
+import classes from "./UserProfile.module.css";
 
 const ContentRenderOutLet = () => {
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className={classes.contentrender}>
         <MiniDrawerRoutingLeftNavBar />
         <div style={{ marginTop: "100px" }}>
           <Outlet />

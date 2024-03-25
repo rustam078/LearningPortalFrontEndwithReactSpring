@@ -57,3 +57,14 @@
     padding: 10px;
   }
   
+
+  @media screen and (max-width: 768px) {
+
+    .modal {
+      top: 15vh;
+      left: 18%;
+      width: 319px;
+    }
+  
+  }
+  

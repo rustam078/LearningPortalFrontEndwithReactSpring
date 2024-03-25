@@ -15,6 +15,8 @@ import { loader as videoLoader } from './components/Addtask/ContentRenderPage';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './components/TanStackQueryHttp/http';
 import ViewDetailsPage,{loader as viewDetailsvideoLoader} from './components/Addtask/ViewDetailsPage';
+import ForgetPassword from './components/user/ForgetPassword';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <SignForm/>,
+  },
+  {
+    path: "/forgetPassword",
+    element: <ForgetPassword />,
   },
   {
     path: "/register",

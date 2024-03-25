@@ -14,9 +14,10 @@
 }
 
 .videoListContainer {
-  width: 90%;
+  width: 100%;
 }
 .videoList {
+  width: 313px;
   height: 482px;
   background: white;
   overflow-y: auto;
@@ -37,7 +38,15 @@
   margin-bottom: 5px;
   box-shadow: 5px 5px 10px rgba(216, 206, 206, 0.3);
 }
+.reactvideoplayer{
+  height: 400px;
+  width: 550px;
+}
 
+.videoplayer{
+  height: 400px;
+  width: 780px;
+}
 /* Hide the scroll bar */
 .videoList::-webkit-scrollbar {
   width: 0.5em; /* Adjust the width as needed */
@@ -80,6 +89,11 @@
 
   .channel{
     display: flex;
+    justify-content:space-around;
+    gap:10px;
+  }
+  .channel1{
+    display: flex;
     align-items: center;
     gap: 10px;
   }
@@ -88,3 +102,48 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .contlarge {
+    background-color: white;
+    width: 780px; /* Default width */
+    padding: 10px;
+  }
+  
+ 
+  .nocontent{
+    font-weight: bold;
+     color: red;
+      margin-left: 510px;
+ }
+
+  @media screen and (max-width: 768px) {
+  .flexcontainer {
+    display:block;
+    width:360px;
+  }
+  .contmobile {
+    width: 360px; /* Width for mobile view */
+  }
+
+  .videoList {
+    width: 360px;
+   
+  }
+
+  .desc{
+    display: block;
+    justify-content: space-between;
+  }
+  .likedislike{
+    display: flex;
+    justify-content: end;
+    margin-top:5px;
+  }
+  .channel{
+    gap:0px;
+  }
+
+  .nocontent{
+      margin-left: 0px;
+ }
+}

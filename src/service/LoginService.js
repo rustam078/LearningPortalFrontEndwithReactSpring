@@ -49,14 +49,14 @@ export const getSkillFromBackend = () => {
 
 
 export const getReportFromBackend = () => {
-    return axios.get("http://localhost:8080/api/categories/report",HEADERS());
+    return axios.get("https://mpairavat.in/learningPortal/api/categories/report",HEADERS());
 }
 
 
 export const getAllUsersFromBackend = () => {
-    return axios.get("http://localhost:8080/api/categories/alluser",HEADERS());
+    return axios.get("https://mpairavat.in/learningPortal/api/categories/alluser",HEADERS());
 }
 
 export const deletecontentFromBackend = (contentId) => {
-    return axios.delete(`http://localhost:8080/api/categories/deletecontent/${contentId}`,HEADERS());
+    return axios.delete(`https://mpairavat.in/learningPortal/api/categories/deletecontent/${contentId}`,HEADERS());
 }

@@ -25,7 +25,7 @@ const navigate=useNavigate();
     };
   
     // Define the URL for your PUT request
-    const apiUrl = `http://localhost:8080/api/categories/updateContent/${props.id}`; // Replace with your actual API URL
+    const apiUrl = `https://mpairavat.in/learningPortal/api/categories/updateContent/${props.id}`; // Replace with your actual API URL
   
     fetch(apiUrl, {
       method: 'PUT',
