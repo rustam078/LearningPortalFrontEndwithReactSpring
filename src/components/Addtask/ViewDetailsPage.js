@@ -51,7 +51,7 @@ const ViewDetailsPage = () => {
             url={selectedVideoUrl}
             controls={true}
             height={isMobileView ? "300px" : "400px"}
-            width={isMobileView ? "330px" : "780px"}
+            width={isMobileView ? "290px" : "780px"}
           />
           <div className="video-content">
             <h2 className={classes.videoplayerTitle}>{selectedVideoTitle}</h2>
@@ -109,8 +109,7 @@ const ViewDetailsPage = () => {
 
           <p className={isMobileView ? classes.contmobile : classes.contlarge}>
         Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
-        reprehenderit dolor. Ipsum Lorem excepteur adipisicing ea eu
-        exercitation commodo reprehenderit dolor.
+        reprehenderit dolor.
       </p>
 
         </div>

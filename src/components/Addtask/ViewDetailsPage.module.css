@@ -120,14 +120,15 @@
   .flexcontainer {
     display:block;
     margin-left: 10px;
-    width:330px;
+    width:290px;
   }
   .contmobile {
-    width: 330px; /* Width for mobile view */
+    padding: 5px;
+    width: 290px; /* Width for mobile view */
   }
 
   .videoList {
-    width: 330px;
+    width: 290px;
    
   }
 
