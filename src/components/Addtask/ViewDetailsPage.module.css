@@ -119,14 +119,15 @@
   @media screen and (max-width: 768px) {
   .flexcontainer {
     display:block;
-    width:360px;
+    margin-left: 8px;
+    width:350px;
   }
   .contmobile {
-    width: 360px; /* Width for mobile view */
+    width: 350px; /* Width for mobile view */
   }
 
   .videoList {
-    width: 360px;
+    width: 350px;
    
   }
 

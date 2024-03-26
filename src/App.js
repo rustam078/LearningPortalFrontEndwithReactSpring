@@ -88,7 +88,12 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+]
+// ,{
+//   basename: "/app",
+// }
+
+);
 
 
 

@@ -51,7 +51,7 @@ const ViewDetailsPage = () => {
             url={selectedVideoUrl}
             controls={true}
             height={isMobileView ? "300px" : "400px"}
-            width={isMobileView ? "360px" : "780px"}
+            width={isMobileView ? "350px" : "780px"}
           />
           <div className="video-content">
             <h2 className={classes.videoplayerTitle}>{selectedVideoTitle}</h2>
