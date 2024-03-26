@@ -28,7 +28,7 @@ const Backdrop = (props) => {
 };
 
 function AddContentForm(props) {
-  const [contentType, setContentType] = useState("VIDEO");
+  const [contentType, setContentType] = useState("YOUTUBE");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [category, setCategory] = useState("");
@@ -50,10 +50,10 @@ function AddContentForm(props) {
     const newContent = {
       id: Date.now(),
       contentType,
-      title,
+      title: title ? title : contentType,
       url,
-      categoryId: category,
-      imageUrl:imageUrl,
+      categoryId: category ? category : 6,
+      imageUrl: imageUrl,
     };
 
     let urls = "https://mpairavat.in/learningPortal/api/categories/add";
@@ -114,8 +114,17 @@ function AddContentForm(props) {
       <h2>Add Task</h2>
       </header>
         <div className={classes.type}>
+        <label>
+            <input
+              type="radio"
+              name="contentType"
+              value="YOUTUBE"
+              checked={contentType === "YOUTUBE"}
+              onChange={() => setContentType("YOUTUBE")}
+            />
+            You tube
+          </label>
           <label>
-            Content Type:
             <input
               type="radio"
               name="contentType"
@@ -136,7 +145,8 @@ function AddContentForm(props) {
             Article
           </label>
         </div>
-        <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
+        {contentType !== "YOUTUBE"&&(<>
+           <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
           <label>
             Title:
            </label>
@@ -176,6 +186,8 @@ function AddContentForm(props) {
               <option value="4">Spring</option>
             </select>
         </div>
+        </>
+        )}
      
        {contentType === "ARTICLE"&&(<> <hr/>
        <div style={{display:'flex',margin:'10px',justifyContent: 'space-between', alignItems: 'baseline'}}>
@@ -230,6 +242,18 @@ function AddContentForm(props) {
               />
           </div>
         )}
+          {contentType === "YOUTUBE" && (
+                  <div style={{display:'flex',margin:'10px',justifyContent: 'center', alignItems: 'baseline'}}>
+                    <label>
+                      YouTube URL:
+                    </label>
+                    <input
+                      type="text"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                    />
+                  </div>
+                )}
         <button type="submit">Add Content</button>
       </Card>
       </form>

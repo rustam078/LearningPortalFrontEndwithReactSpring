@@ -58,8 +58,8 @@ const ViewDetailsPage = () => {
             <div className={classes.desc}>
               <div className={classes.channel}>
                 <div className={classes.channel1}>
-                <Avatar src={faker.image.avatar()} alt="Channel Avatar" />
-                <span>Channel Name</span>
+                  <Avatar src={faker.image.avatar()} alt="Channel Avatar" />
+                  <span>Channel Name</span>
                 </div>
                 <Button
                   variant="contained"
@@ -73,44 +73,44 @@ const ViewDetailsPage = () => {
                 </Button>
               </div>
               <div className={classes.likedislike}>
-              <Button
-  variant="text"
-  startIcon={<ThumbUpIcon />}
-//   onClick={() => handleLikeClick()}
->
-  Like
-</Button>
+                <Button
+                  variant="text"
+                  startIcon={<ThumbUpIcon />}
+                //   onClick={() => handleLikeClick()}
+                >
+                  Like
+                </Button>
 
-<Button
-  variant="text"
-  startIcon={<ThumbDownIcon />}
-//   onClick={() => handleDislikeClick()}
->
-  Dislike
-</Button>
+                <Button
+                  variant="text"
+                  startIcon={<ThumbDownIcon />}
+                //   onClick={() => handleDislikeClick()}
+                >
+                  Dislike
+                </Button>
 
-<Button
-  variant="text"
-  startIcon={<ShareIcon />}
-//   onClick={() => handleShareClick()}
->
-  Share
-</Button>
+                <Button
+                  variant="text"
+                  startIcon={<ShareIcon />}
+                //   onClick={() => handleShareClick()}
+                >
+                  Share
+                </Button>
 
-<Button
-  variant="text"
-  startIcon={<MoreVertIcon />}
-//   onClick={() => handleMoreOptionsClick()}
->
-</Button>
+                <Button
+                  variant="text"
+                  startIcon={<MoreVertIcon />}
+                //   onClick={() => handleMoreOptionsClick()}
+                >
+                </Button>
               </div>
             </div>
           </div>
 
           <p className={isMobileView ? classes.contmobile : classes.contlarge}>
-        Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
-        reprehenderit dolor.
-      </p>
+            Ipsum Lorem excepteur adipisicing ea eu exercitation commodo
+            reprehenderit dolor.
+          </p>
 
         </div>
 
@@ -122,21 +122,29 @@ const ViewDetailsPage = () => {
                 videoData.map((video, index) => (
                   <li
                     key={video.id}
-                    className={`${classes.itemList} ${
-                      index === activeItemIndex ? classes.activeItem : ""
-                    }`}
+                    className={`${classes.itemList} ${index === activeItemIndex ? classes.activeItem : ""
+                      }`}
                   >
                     <div
-                      style={{ display: "flex", cursor: "pointer" }}
+                      style={{ display: "flex", gap: "16px", cursor: "pointer" }}
                       onClick={() =>
                         handleVideoLinkClick(video.url, index, video.title)
                       }
                     >
-                      <img
+                      {/* <img
                         className={classes.thumbnail}
                         src={faker.image.image()}
                         alt={`Profile of ${video.id}`}
-                      />
+                      /> */}
+
+                      <div style={{ paddingBottom:"3px" }}>
+                        <ReactPlayer
+                          url={video.url}
+                          controls={true}
+                          height="100px"
+                          width="100px"
+                        />
+                      </div>
                       <div>
                         <p className={classes.videoTitle}>
                           {video.title.length > 20
@@ -163,7 +171,7 @@ const ViewDetailsPage = () => {
         </div>
       </div>
 
-    
+
     </>
   );
 };
@@ -172,7 +180,7 @@ export default ViewDetailsPage;
 
 export async function loader() {
   let apiUrl =
-    "https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=VIDEO";
+    "https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=YOUTUBE";
   try {
     const response = await fetch(apiUrl, HEADERS());
 

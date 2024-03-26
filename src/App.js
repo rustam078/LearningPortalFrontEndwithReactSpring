@@ -8,6 +8,7 @@ import ContentRenderOutLet from './components/user/ContentRenderOutLet';
 import UserProfile from './components/user/UserProfile';
 import ContentRenderPage from './components/Addtask/ContentRenderPage';
 import Register from './components/user/Register';
+import YouTubeView from './components/YouTubeView';
 import PrivateRoutes from './service/PrivateRoutes';
 import LandingPage from './static homepages/LandingPage';
 import AddContentForm from './components/Addtask/AddContentForm';
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
           {
             path: "dashboard",
             element: <UserProfile />,
+          },
+          {
+            path: "dashboard/youtube",
+            element: <ContentRenderPage />,
+            loader:videoLoader,
           },
           {
             path: "dashboard/mediamix",

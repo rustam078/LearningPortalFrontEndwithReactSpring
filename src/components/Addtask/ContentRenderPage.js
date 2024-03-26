@@ -69,6 +69,7 @@ export async function loader({ request, params }) {
   // Check if the request URL contains "VIDEO" or "ARTICLE" in uppercase
   const isVideoRequest = requestUrl.includes('VIDEOS');
   const isArticleRequest = requestUrl.includes('ARTICLE');
+  const isYoutubeRequest = requestUrl.includes('YOUTUBE');
 
   // Construct the API URL based on the condition
   let apiUrl;
@@ -76,6 +77,8 @@ export async function loader({ request, params }) {
     apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=VIDEO';
   } else if (isArticleRequest) {
     apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=ARTICLE';
+  } else if (isYoutubeRequest) {
+    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=YOUTUBE';
   } else {
     apiUrl = 'https://mpairavat.in/learningPortal/api/categories/view';
   }

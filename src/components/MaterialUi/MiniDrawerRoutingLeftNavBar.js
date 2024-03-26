@@ -109,6 +109,7 @@ const iconArray = [
   <PermMediaIcon />,
   <YouTubeIcon />,
   <AutoStoriesIcon />,
+  <YouTubeIcon />,
 ];
 
 export default function MiniDrawerRoutingLeftNavBar() {
@@ -255,7 +256,7 @@ export default function MiniDrawerRoutingLeftNavBar() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["DashBoard", "Media Mix", "Videos", "Articles"].map(
+          {["DashBoard", "Media Mix", "Videos", "Articles","Youtube"].map(
             (text, index) => (
               <ListItem   key={text} disablePadding sx={{ display: "block" }}     className={activeLink === text ? "active-link" : ""} >
                 <ListItemButton

@@ -1,0 +1,17 @@
+.youtubeContainer {
+  margin: 20px;
+}
+
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.videoContainer input {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  padding: 5px;
+}
