@@ -52,7 +52,7 @@ function AddContentForm(props) {
       contentType,
       title: title ? title : contentType,
       url,
-      categoryId: category ? category : 6,
+      categoryId: category ? category : contentType==="YOUTUBE"?6:1,
       imageUrl: imageUrl,
     };
 

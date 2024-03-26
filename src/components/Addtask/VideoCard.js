@@ -56,7 +56,7 @@ function VideoCard({ id, title, description, videoUrl, type }) {
     <>
       {showmodel && <UpdateModel id={showmodel.id} title={showmodel.title} videoUrl={showmodel.videoUrl} onConfirm={updatesetShowModel} />}
       <div className="video-card" style={{
-         padding: type === "YOUTUBE" ? "0px" : "16px"
+        padding: type === "YOUTUBE" ? "0px" : "16px"
       }}>
         <Link to={`/dashboard/viewdetails/${id}?url=${videoUrl}`} className="video-link" style={{ textDecoration: 'none' }}>
           <div style={{ display: 'flex' }}>
@@ -75,10 +75,17 @@ function VideoCard({ id, title, description, videoUrl, type }) {
             )}
           </div>
         </Link>
-        <div className="delete-button">
-          {titiletype !== "YOUTUBE" && <EditIcon onClick={() => showPopupModel(id, videoUrl, title)} />}
-          <DeleteIcon onClick={() => handleDeleteClick(id)} />
+
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Link to={`/dashboard/viewdetails/${id}?url=${videoUrl}`} className="video-link" style={{ textDecoration: 'none' }}>
+            <div style={{ width: "250px" }}></div>
+          </Link>
+          <div className="delete-button">
+            {titiletype !== "YOUTUBE" && <EditIcon onClick={() => showPopupModel(id, videoUrl, title)} />}
+            <DeleteIcon onClick={() => handleDeleteClick(id)} />
+          </div>
         </div>
+
       </div>
     </>
   );
