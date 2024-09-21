@@ -3,6 +3,8 @@ import "./register.css";
 import { loadPopup, loadSuccessPopup } from "../../service/ToastifyPopup";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../service/UrlUtils";
+
 const initialValue = {
   firstname: "",
   lastname: "",
@@ -20,7 +22,7 @@ const Register = (props) => {
       try {
         const email = formData.email;
         const response = await axios.post(
-          "https://mpairavat.in/learningPortal/api/v1/auth/validate-email",
+         `${BASE_URL}/api/v1/auth/validate-email`,
           { email }
         );
         if (response.data === true) {
@@ -91,7 +93,7 @@ const Register = (props) => {
     if (isValid) {
       try {
         const response = await axios.post(
-          "https://mpairavat.in/learningPortal/api/v1/auth/register",
+          `${BASE_URL}/api/v1/auth/register`,
           formData
         ); // Adjust the URL to your backend endpoint
         console.log("Registration response:", response.data);

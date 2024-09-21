@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./register.css";
 import { loadPopup, loadSuccessPopup } from "../../service/ToastifyPopup";
 import axios from "axios";
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
+import { BASE_URL } from "../../service/UrlUtils";
 
 const SignForm = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const SignForm = () => {
   const navigate = useNavigate();
 
 
- 
+
 
   const handleSignIn = async (event) => {
     event.preventDefault();
@@ -33,16 +34,16 @@ const SignForm = () => {
     if (isValid) {
       try {
         const response = await axios.post(
-          "https://mpairavat.in/learningPortal/api/v1/auth/authenticate",
+          `${BASE_URL}/api/v1/auth/authenticate`,
           { email, password }
         );
         console.log("Sign-in response:", response.data);
         const jwtCookie = document.cookie.split('; ').find((cookie) => cookie.startsWith('jwtToken='));
 
-// Extract the token value from the cookie
-const jwtToken = jwtCookie ? jwtCookie.split('=')[1] : null;
+        // Extract the token value from the cookie
+        const jwtToken = jwtCookie ? jwtCookie.split('=')[1] : null;
 
-console.log('JWT Token:', jwtToken);
+        console.log('JWT Token:', jwtToken);
         loadSuccessPopup("Sign-in successful");
         sessionStorage.setItem("user", JSON.stringify(response.data));
         navigate("/dashboard");
@@ -59,7 +60,7 @@ console.log('JWT Token:', jwtToken);
     event.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(`https://mpairavat.in/learningPortal/forgetPassword/${email}`);
+      const response = await axios.post(`${BASE_URL}/forgetPassword/${email}`);
       loadSuccessPopup("Password reset email sent successfully ");
     } catch (error) {
       console.error("Error sending password reset email:", error);
@@ -70,77 +71,113 @@ console.log('JWT Token:', jwtToken);
     setIsLoading(false);
   };
 
+  const handleOAuthLogin = (provider) => {
+    window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
+  };
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/oauthSignin`, { withCredentials: true })
+        .then(response => {
+         // setUsername(response.data);
+            console.log("response.data ===========================>> ", response.data);
+            sessionStorage.setItem("user", JSON.stringify(response.data));
+ 
+            // Redirect to the home page
+            navigate('/dashboard');
+        })
+        .catch(error => {
+            console.error("Error occurred while fetching user data:", error);
+        });
+}, []); //
+
   return (
     <div className="App">
-    <h1>Sign In Form</h1>
-    <div className="form-container">
-      <form className="form" onSubmit={handleSignIn}>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        {!isForgotPassword && (
+      <h1>Sign In Form</h1>
+      <div className="form-container">
+        <div className="form">
+        <form  onSubmit={handleSignIn}>
           <div className="form-group">
-            <label>Password:</label>
+            <label>Email:</label>
             <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-        )}
-        {isLoading && <p style={{textAlign:"center",margin:'5px',color: "#0e5c5f"}}>Sending please wait...</p>}
-        <div className="flexbtn">
-          {isForgotPassword ? (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 500 }}
-              type="button"
-              onClick={handleSend}
-              disabled={isLoading}
-            >
-              {isLoading ? "Sending..." : "Send Email"}
-            </motion.button>
-          ) : (
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 500 }}
-              type="submit"
-            >
-              Sign In
-            </motion.button>
-          )}
           {!isForgotPassword && (
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          )}
+          {isLoading && <p style={{ textAlign: "center", margin: '5px', color: "#0e5c5f" }}>Sending please wait...</p>}
+          <div className="flexbtn">
+            {isForgotPassword ? (
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 500 }}
+                type="button"
+                onClick={handleSend}
+                disabled={isLoading}
+              >
+                {isLoading ? "Sending..." : "Send Email"}
+              </motion.button>
+            ) : (
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 500 }}
+                type="submit"
+              >
+                Sign In
+              </motion.button>
+            )}
+            {!isForgotPassword && (
+              <>
+                not a member?
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  Sign Up
+                </Link>
+              </>
+            )}
+
+          </div>
+          </form>
+          {!isForgotPassword &&(
             <>
-              not a member?
-              <Link to="/register" style={{ textDecoration: "none" }}>
-                Sign Up
-              </Link>
-            </>
+          <div className="separator">or login with</div>
+          <div className="oauthButtons">
+            <button className="oauthButton google" onClick={() => handleOAuthLogin('google')}>
+              <FaGoogle className="icon" />
+              Login with Google
+            </button>
+            <button className="oauthButton github" onClick={() => handleOAuthLogin('github')}>
+              <FaGithub className="icon" />
+              Login with GitHub
+            </button>
+          </div>
+          </>
           )}
 
-        </div>
-        <Link
-          to="#"
-          style={{
-            textDecoration: "none",
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "31px",
-          }}
-          onClick={() => setIsForgotPassword(!isForgotPassword)}
-        >
-          {isForgotPassword ? "Back to Sign In" : "Forget Password?"}
-        </Link>
-
-      </form>
+          <Link
+            to="#"
+            style={{
+              textDecoration: "none",
+              display: "flex",
+              justifyContent: "center",
+              paddingTop: "31px",
+            }}
+            onClick={() => setIsForgotPassword(!isForgotPassword)}
+          >
+            {isForgotPassword ? "Back to Sign In" : "Forget Password?"}
+          </Link>
+      </div>
     </div>
-  </div>
-);
+    </div>
+  );
 };
 
 export default SignForm;

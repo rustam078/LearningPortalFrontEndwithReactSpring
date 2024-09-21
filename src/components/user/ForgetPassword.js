@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { loadPopup, loadSuccessPopup } from "../../service/ToastifyPopup";
 import axios from "axios";
 import "../user/register.css";
-
+import { BASE_URL } from "../../service/UrlUtils";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +35,7 @@ const ForgetPassword = () => {
  console.log(email+" "+otp+" "+newPassword)
 
  try {
-      const response = await axios.post("https://mpairavat.in/learningPortal/updatePassword", {
+      const response = await axios.post(`${BASE_URL}/updatePassword`, {
         email,
         newPassword,
         otp,

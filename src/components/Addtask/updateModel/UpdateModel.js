@@ -6,6 +6,8 @@ import classes from "./update.module.css";
 import { getUser } from "../../../service/LoginService";
 import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
+import { BASE_URL } from "../../../service/UrlUtils";
+
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onConfirm} />;
 };
@@ -25,7 +27,7 @@ const navigate=useNavigate();
     };
   
     // Define the URL for your PUT request
-    const apiUrl = `https://mpairavat.in/learningPortal/api/categories/updateContent/${props.id}`; // Replace with your actual API URL
+    const apiUrl = `${BASE_URL}/api/categories/updateContent/${props.id}`; // Replace with your actual API URL
   
     fetch(apiUrl, {
       method: 'PUT',

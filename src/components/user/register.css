@@ -57,3 +57,52 @@
     align-items: center;
     justify-content: center;
   }
+
+
+  .separator {
+    margin: 0px 0px 13px 0;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+  }
+  
+  .oauthButtons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .oauthButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .oauthButton .icon {
+    margin-right: 10px;
+  }
+  
+  .google {
+    background-color: #db4437;
+    color: white;
+  }
+  
+  .google:hover {
+    background-color: #c33c28;
+  }
+  
+  .github {
+    background-color: #333;
+    color: white;
+  }
+  
+  .github:hover {
+    background-color: #242424;
+  }
+  

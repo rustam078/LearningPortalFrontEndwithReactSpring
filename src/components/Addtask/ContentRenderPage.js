@@ -7,7 +7,7 @@ import './VideoCard.css';
 import { HEADERS } from '../../service/UrlUtils';
 import ArticleCard from './ArticleCard';
 import { motion,AnimatePresence } from 'framer-motion';
-
+import { BASE_URL } from '../../service/UrlUtils';
 
 function ContentRenderPage() {
   const videoData = useLoaderData();
@@ -74,17 +74,17 @@ export async function loader({ request, params }) {
   // Construct the API URL based on the condition
   let apiUrl;
   if (isVideoRequest) {
-    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=VIDEO';
+    apiUrl = `${BASE_URL}/api/categories/byContentType?contentType=VIDEO`;
   } else if (isArticleRequest) {
-    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=ARTICLE';
+    apiUrl = `${BASE_URL}/api/categories/byContentType?contentType=ARTICLE`;
   } else if (isYoutubeRequest) {
-    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=YOUTUBE';
+    apiUrl = `${BASE_URL}/api/categories/byContentType?contentType=YOUTUBE`;
   } else {
-    apiUrl = 'https://mpairavat.in/learningPortal/api/categories/view';
+    apiUrl = `${BASE_URL}/api/categories/view`;
   }
 
   if (params.id != null) {
-       apiUrl = `https://mpairavat.in/learningPortal/api/categories/fetchByCategoryAndUser?categoryId=${categoryToFetch}`;
+       apiUrl = `${BASE_URL}/api/categories/fetchByCategoryAndUser?categoryId=${categoryToFetch}`;
     try {
       const response = await fetch(apiUrl, HEADERS());
 

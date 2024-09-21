@@ -9,6 +9,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShareIcon from "@mui/icons-material/Share";
+import { BASE_URL } from "../../service/UrlUtils";
 
 const ViewDetailsPage = () => {
   const { id } = useParams();
@@ -179,8 +180,7 @@ const ViewDetailsPage = () => {
 export default ViewDetailsPage;
 
 export async function loader() {
-  let apiUrl =
-    "https://mpairavat.in/learningPortal/api/categories/byContentType?contentType=YOUTUBE";
+  let apiUrl =`${BASE_URL}/api/categories/byContentType?contentType=YOUTUBE`;
   try {
     const response = await fetch(apiUrl, HEADERS());
 

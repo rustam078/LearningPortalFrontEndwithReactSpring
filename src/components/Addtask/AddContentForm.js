@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import classess from "./updateModel/update.module.css";
 import Card from "./updateModel/Card";
 import { motion, AnimatePresence } from 'framer-motion';
+import { BASE_URL } from "../../service/UrlUtils";
 
 const modalVariants = {
   hidden: {
@@ -56,7 +57,7 @@ function AddContentForm(props) {
       imageUrl: imageUrl,
     };
 
-    let urls = "https://mpairavat.in/learningPortal/api/categories/add";
+    let urls = `${BASE_URL}/api/categories/add`;
     console.log(newContent);
     const token = user.token;
     fetch(urls, {
@@ -184,6 +185,7 @@ function AddContentForm(props) {
               <option value="2">HTML</option>
               <option value="3">React</option>
               <option value="4">Spring</option>
+              <option value="4">Others</option>
             </select>
         </div>
         </>

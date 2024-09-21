@@ -35,6 +35,7 @@ import { motion,useAnimation } from "framer-motion";
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import '../../static homepages/LandingPage.css';
+import { BASE_URL } from "../../service/UrlUtils";
 
 
 const drawerWidth = 240;
@@ -157,7 +158,7 @@ export default function MiniDrawerRoutingLeftNavBar() {
   
   // const [categories, setCategories] = React.useState([]);
   // React.useEffect(() => {
-    //   axios.get('https://mpairavat.in/learningPortal/api/categories/user', HEADERS()
+    //   axios.get(`${BASE_URL}/api/categories/user`, HEADERS()
     //   )
     //     .then((response) => {
       //       console.log(response.data);

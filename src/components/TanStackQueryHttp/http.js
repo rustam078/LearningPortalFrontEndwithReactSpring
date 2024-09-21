@@ -1,10 +1,10 @@
 import { HEADERS } from "../../service/UrlUtils";
 import { QueryClient } from "@tanstack/react-query";
-
+import { BASE_URL } from "../../service/UrlUtils";
 export   const queryClient=new QueryClient();
 export async function fetchEvents() {
     try {
-      const response = await fetch('https://mpairavat.in/learningPortal/api/categories/user', HEADERS());
+      const response = await fetch(`${BASE_URL}/api/categories/user`, HEADERS());
   
       if (!response.ok) {
         const error = new Error('An error has occurred while fetching data.');
@@ -25,7 +25,7 @@ export async function fetchEvents() {
 
 export async function fetchNotification() {
     try {
-      const response = await fetch("https://mpairavat.in/learningPortal/api/categories/report",HEADERS());
+      const response = await fetch(`${BASE_URL}/api/categories/report`,HEADERS());
   
       if (!response.ok) {
         const error = new Error('An error has occurred while fetching data.');
