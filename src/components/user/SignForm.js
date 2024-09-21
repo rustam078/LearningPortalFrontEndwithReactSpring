@@ -72,11 +72,11 @@ const SignForm = () => {
   };
 
   const handleOAuthLogin = (provider) => {
-    window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
+    window.location.href = `https://mpairavat.in/learningPortal/oauth2/authorization/${provider}`;
   };
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/oauthSignin`, { withCredentials: true })
+    axios.get("https://mpairavat.in/learningPortal/oauthSignin",{ withCredentials: true })
       .then(response => {
         console.log("response.data ===========================>> ", response.data);
         sessionStorage.setItem("user", JSON.stringify(response.data));
