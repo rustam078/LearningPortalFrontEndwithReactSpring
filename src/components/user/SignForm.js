@@ -76,22 +76,28 @@ const SignForm = () => {
   };
 
   useEffect(() => {
-    axios.get("https://mpairavat.in/learningPortal/oauthSignin",{ withCredentials: true })
+    fetch("https://mpairavat.in/learningPortal/oauthSignin", {
+      method: 'GET',
+      credentials: 'include' // This ensures cookies are sent with the request
+    })
       .then(response => {
-        console.log("response.data ===========================>> ", response.data);
-        sessionStorage.setItem("user", JSON.stringify(response.data));
+        if (!response.ok) {
+          // If the response is not OK (e.g., status 400 or 500), throw an error
+          return response.json().then(errData => {
+            throw new Error(`Error: ${response.status} - ${errData}`);
+          });
+        }
+        return response.json(); // Parse JSON response
+      })
+      .then(data => {
+        console.log("response.data ===========================>> ", data);
+        sessionStorage.setItem("user", JSON.stringify(data));
         navigate('/dashboard');
       })
       .catch(error => {
-        if (error.response) {
-          console.error("Error response from server:", error.response.data);
-          console.error("Status code:", error.response.status);
-        } else if (error.request) {
-          console.error("No response received:", error.request);
-        } else {
-          console.error("Error occurred while fetching user data:", error.message);
-        }
+        console.error("Error occurred while fetching user data:", error.message);
       });
+    
   }, [navigate]);
 
   return (
