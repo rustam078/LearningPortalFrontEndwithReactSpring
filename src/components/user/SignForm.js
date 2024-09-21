@@ -77,18 +77,22 @@ const SignForm = () => {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/oauthSignin`, { withCredentials: true })
-        .then(response => {
-         // setUsername(response.data);
-            console.log("response.data ===========================>> ", response.data);
-            sessionStorage.setItem("user", JSON.stringify(response.data));
- 
-            // Redirect to the home page
-            navigate('/dashboard');
-        })
-        .catch(error => {
-            console.error("Error occurred while fetching user data:", error);
-        });
-}, []); //
+      .then(response => {
+        console.log("response.data ===========================>> ", response.data);
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        navigate('/dashboard');
+      })
+      .catch(error => {
+        if (error.response) {
+          console.error("Error response from server:", error.response.data);
+          console.error("Status code:", error.response.status);
+        } else if (error.request) {
+          console.error("No response received:", error.request);
+        } else {
+          console.error("Error occurred while fetching user data:", error.message);
+        }
+      });
+  }, [navigate]);
 
   return (
     <div className="App">
