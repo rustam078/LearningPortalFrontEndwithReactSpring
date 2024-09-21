@@ -72,33 +72,39 @@ const SignForm = () => {
   };
 
   const handleOAuthLogin = (provider) => {
-    window.location.href = `https://mpairavat.in/learningPortal/oauth2/authorization/${provider}`;
+    window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
   };
 
   useEffect(() => {
-    fetch("https://mpairavat.in/learningPortal/oauthSignin", {
-      method: 'GET',
-      credentials: 'include' // This ensures cookies are sent with the request
-    })
+    axios.get(`${BASE_URL}/oauthSignin`, { withCredentials: true })
       .then(response => {
-        if (!response.ok) {
-          // If the response is not OK (e.g., status 400 or 500), throw an error
-          return response.json().then(errData => {
-            throw new Error(`Error: ${response.status} - ${errData}`);
-          });
-        }
-        return response.json(); // Parse JSON response
-      })
-      .then(data => {
-        console.log("response.data ===========================>> ", data);
-        sessionStorage.setItem("user", data);
+        console.log("response.data ===========================>> ", response.data);
+        sessionStorage.setItem("user", JSON.stringify(response.data));
         navigate('/dashboard');
       })
       .catch(error => {
-        console.error("Error occurred while fetching user data:", error.message);
+        if (error.response) {
+          console.error("Error response from server:", error.response.data);
+          console.error("Status code:", error.response.status);
+  
+          // Make another API call on error
+          axios.get(`${BASE_URL}/oauthSignin`)
+            .then(retryResponse => {
+              console.log("Retry response.data ===========================>> ", retryResponse.data);
+              sessionStorage.setItem("user", JSON.stringify(retryResponse.data));
+              navigate('/dashboard');
+            })
+            .catch(retryError => {
+              console.error("Error during retrying the request:", retryError.message);
+            });
+        } else if (error.request) {
+          console.error("No response received:", error.request);
+        } else {
+          console.error("Error occurred while fetching user data:", error.message);
+        }
       });
-    
   }, [navigate]);
+  
 
   return (
     <div className="App">
