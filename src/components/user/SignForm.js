@@ -91,7 +91,7 @@ const SignForm = () => {
       })
       .then(data => {
         console.log("response.data ===========================>> ", data);
-        sessionStorage.setItem("user", JSON.stringify(data));
+        sessionStorage.setItem("user", data);
         navigate('/dashboard');
       })
       .catch(error => {
