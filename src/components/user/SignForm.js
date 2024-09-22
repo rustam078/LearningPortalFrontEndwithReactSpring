@@ -76,7 +76,7 @@ const SignForm = () => {
   };
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/oauthSignin`, { withCredentials: true })
+    axios.get(`${BASE_URL}/oauthSignin`,{ withCredentials: true })
       .then(response => {
         console.log("response.data ===========================>> ", response.data);
         sessionStorage.setItem("user", JSON.stringify(response.data));
@@ -86,17 +86,6 @@ const SignForm = () => {
         if (error.response) {
           console.error("Error response from server:", error.response.data);
           console.error("Status code:", error.response.status);
-  
-          // Make another API call on error
-          axios.get(`${BASE_URL}/oauthSignin`)
-            .then(retryResponse => {
-              console.log("Retry response.data ===========================>> ", retryResponse.data);
-              sessionStorage.setItem("user", JSON.stringify(retryResponse.data));
-              navigate('/dashboard');
-            })
-            .catch(retryError => {
-              console.error("Error during retrying the request:", retryError.message);
-            });
         } else if (error.request) {
           console.error("No response received:", error.request);
         } else {
@@ -104,7 +93,6 @@ const SignForm = () => {
         }
       });
   }, [navigate]);
-  
 
   return (
     <div className="App">
