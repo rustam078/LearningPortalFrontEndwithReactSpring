@@ -99,9 +99,9 @@ const router = createBrowserRouter([
     ],
   },
 ]
-,{
-  basename: "/lp",
-}
+// ,{
+//   basename: "/lp",
+// }
 
 );
 
