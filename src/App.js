@@ -17,6 +17,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './components/TanStackQueryHttp/http';
 import ViewDetailsPage,{loader as viewDetailsvideoLoader} from './components/Addtask/ViewDetailsPage';
 import ForgetPassword from './components/user/ForgetPassword';
+import OAuthRedirectHandler from './service/OAuthRedirectHandler';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,9 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },{
+    path: "/oauth2/callback" ,
+    element: <OAuthRedirectHandler />,
   },
   {
     path: "/",
@@ -95,9 +99,9 @@ const router = createBrowserRouter([
     ],
   },
 ]
-// ,{
-//   basename: "/app",
-// }
+,{
+  basename: "/lp",
+}
 
 );
 

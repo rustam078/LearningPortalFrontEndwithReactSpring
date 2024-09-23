@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./register.css";
 import { loadPopup, loadSuccessPopup } from "../../service/ToastifyPopup";
 import axios from "axios";
@@ -73,27 +73,9 @@ const SignForm = () => {
 
   const handleOAuthLogin = (provider) => {
     window.location.href = `${BASE_URL}/oauth2/authorization/${provider}`;
+    //after this it will call OAuthRedirectHandler.js see in service and App.js  folder for oAuth
   };
-
-  useEffect(() => {
-    axios.get(`${BASE_URL}/oauthSignin`,{ withCredentials: true })
-      .then(response => {
-        console.log("response.data ===========================>> ", response.data);
-        sessionStorage.setItem("user", JSON.stringify(response.data));
-        navigate('/dashboard');
-      })
-      .catch(error => {
-        if (error.response) {
-          console.error("Error response from server:", error.response.data);
-          console.error("Status code:", error.response.status);
-        } else if (error.request) {
-          console.error("No response received:", error.request);
-        } else {
-          console.error("Error occurred while fetching user data:", error.message);
-        }
-      });
-  }, [navigate]);
-
+  
   return (
     <div className="App">
       <h1>Sign In Form</h1>
