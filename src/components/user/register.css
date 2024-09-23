@@ -84,6 +84,7 @@
     transition: background-color 0.3s ease;
   }
   
+  
   .oauthButton .icon {
     margin-right: 10px;
   }
@@ -106,3 +107,9 @@
     background-color: #242424;
   }
   
+
+  @media (max-width: 600px) {
+    .oauthButton {
+      font-size: 12px;
+    }
+  }
